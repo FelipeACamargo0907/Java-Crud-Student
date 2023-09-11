@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 public record StudentRequest(
     @NotBlank() 
     String name,
-    @NotBlank()@Email(message = "Escreva um email válido!") 
+    @NotBlank()
     String email,
     @NotBlank() 
     String address,
