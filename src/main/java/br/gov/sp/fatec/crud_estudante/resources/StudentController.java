@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.gov.sp.fatec.crud_estudante.dtos.StudentRequest;
 import br.gov.sp.fatec.crud_estudante.dtos.StudentResponse;
 import br.gov.sp.fatec.crud_estudante.entities.Student;
+import br.gov.sp.fatec.crud_estudante.mappers.StudentMapper;
 import br.gov.sp.fatec.crud_estudante.services.StudentServices;
 
 @RestController 
@@ -31,15 +32,15 @@ public class StudentController {
     private StudentServices service;
 
     @GetMapping
-    public ResponseEntity<List<Student>> getStudents() {
+    public ResponseEntity<List<StudentResponse>> getStudents() {
         var students = this.service.getStudents();
-        return ResponseEntity.ok(students);
+        return ResponseEntity.ok(StudentMapper.toDTOList(students));
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Student> getStudent(@PathVariable long id){
+    public ResponseEntity<StudentResponse> getStudent(@PathVariable long id){
         var student = this.service.getStudent(id);
-        return ResponseEntity.ok(student);
+        return ResponseEntity.ok(StudentMapper.toDTO(student));
     }
 
     @DeleteMapping("{id}")
